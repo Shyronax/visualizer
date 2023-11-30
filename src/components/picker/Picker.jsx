@@ -29,6 +29,20 @@ const Picker = () => {
       >
         Logo IUT
       </div>
+      <div
+        onClick={() => {
+          pickVisualizer("board");
+        }}
+      >
+        Board
+      </div>
+      <div
+        onClick={() => {
+          pickVisualizer("cover");
+        }}
+      >
+        Cover
+      </div>
     </div>
   );
 };

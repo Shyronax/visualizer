@@ -10,6 +10,8 @@ import Line from "./objects/Line";
 import Cube from "./objects/Cube";
 import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
 import Logo from "./objects/LogoIut";
+import Board from "./objects/Board";
+import Cover from "./objects/Cover";
 
 class SCENE {
   setup(canvas) {
@@ -24,6 +26,7 @@ class SCENE {
     this.setupRenderer();
     this.setupPostProcessing();
     this.setupGLTFLoader();
+    this.setupTextureLoader();
 
     this.addObjects();
     this.addEvents();
@@ -32,6 +35,10 @@ class SCENE {
   setupGLTFLoader() {
     this.gltfLoader = new GLTFLoader();
     this.gltfLoader.load("/logo-iut.glb", (logo) => {});
+  }
+
+  setupTextureLoader() {
+    this.textureLoader = new THREE.TextureLoader();
   }
 
   setupScene() {
@@ -149,8 +156,10 @@ class SCENE {
     this.cube = new Cube();
     this.line = new Line();
     this.logoIut = new Logo();
+    this.board = new Board();
+    this.cover = new Cover();
 
-    this.selectedObject = this.cube;
+    this.selectedObject = this.cover;
     this.scene.add(this.selectedObject.group);
   }
 
@@ -170,6 +179,16 @@ class SCENE {
       case "logo":
         this.selectedObject = this.logoIut;
         this.camera.position.z = 20;
+        break;
+
+      case "board":
+        this.selectedObject = this.board;
+        this.camera.position.z = 80;
+        break;
+
+      case "cover":
+        this.selectedObject = this.cover;
+        this.camera.position.z = 10;
         break;
 
       default:
